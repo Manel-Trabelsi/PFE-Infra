@@ -25,9 +25,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     load_balancer_sku = "standard"
     network_plugin    = "kubenet" # azure (CNI)
   }
-  lifecycle {
-    ignore_changes = all
-  }
+  
 }
 
 
@@ -111,6 +109,9 @@ resource "azurerm_mysql_flexible_server" "mysql_server" {
   tags = {
     environment = "production"
   }
+  lifecycle {
+    ignore_changes = all
+  }
 }
 # Allow Azure IPs to connect to MySQL
 resource "azurerm_mysql_flexible_server_firewall_rule" "allow_azure_ips" {
@@ -119,6 +120,9 @@ resource "azurerm_mysql_flexible_server_firewall_rule" "allow_azure_ips" {
   resource_group_name = azurerm_resource_group.rg.name
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "255.255.255.255"
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # Azure MySQL Flexible Server Database
@@ -128,6 +132,9 @@ resource "azurerm_mysql_flexible_database" "db" {
   server_name         = azurerm_mysql_flexible_server.mysql_server.name
   collation           = "utf8_general_ci"
   charset             = "utf8"
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # Kubernetes Secret for MySQL credentials
@@ -145,6 +152,9 @@ resource "kubernetes_secret" "mysql_secret" {
   }
 
   type = "Opaque"
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # Output MySQL Connection String

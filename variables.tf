@@ -13,19 +13,19 @@ variable "location" {
 variable "system_node_count" {
   type        = number
   description = "The initial quantity of nodes for the system node pool."
-  default     = 1
+  default     = 2
 }
 
 variable "min_user_node_count" {
   type        = number
   description = "The minimum quantity of nodes for the user node pool."
-  default     = 1
+  default     = 2
 }
 
 variable "max_user_node_count" {
   type        = number
   description = "The maximum quantity of nodes for the user node pool."
-  default     = 1
+  default     = 2
 }
 
 variable "cluster_name" {
